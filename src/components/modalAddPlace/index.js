@@ -19,69 +19,67 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
         animationType= "fade"
         visible={modalIsVisible}
         onRequestClose={() => {setModalIsVisible(false)}}>
-            <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={0} style={{flex: 1}}>
-                <View style={styles.container}>  
-                    <TouchableOpacity style={{alignSelf: 'flex-end', padding: 10}} onPress={() => setModalIsVisible(false)}>
-                        <FontAwesome5 name="window-close" size={32} color="white" />
-                    </TouchableOpacity>
-                    <Text style={{fontSize: 20, padding: 8}}>Dê detalhes sobre a casa:</Text>
-                    <View style={{padding: 16, gap: 10, justifyContent: 'center'}}>
-                        <View>
-                            <Text>Endereço</Text>
-                            <TextInput 
-                            style={styles.textInput}
-                            multiline
-                            placeholder='Nome da Rua ou Avenida'
-                            placeholderTextColor={'#fff'}
-                            />
-                        </View>
-                        <View>
-                            <Text>Número</Text>
-                            <TextInput 
-                            style={styles.textInput}
-                            keyboardType='number-pad'
-                            placeholder='Número da Casa ou Ap'
-                            placeholderTextColor={'#fff'} 
-                            />
-                        </View>
-                        <View>
-                            <Text>Espaço Disponível</Text>
-                            <TextInput 
-                            style={styles.textInput}
-                            keyboardType='number-pad'
-                            placeholder='Quantidade de Pessoas'
-                            placeholderTextColor={'#fff'} 
-                            />
-                        </View>
-                        <View>
-                            <Text>Prós</Text>
-                            <TextInput 
-                            placeholder='Ex: Casa grande, Lugar seguro, Climatizado e etc..'
-                            multiline
-                            placeholderTextColor={'#fff'} 
-                            style={{...styles.textInput, height: 80}}
-                            />
-                        </View>
-                        <View>
-                            <Text>Preferências do dono</Text>
-                            <TextInput 
-                            placeholder='Ex: Não adolescentes, Não gosto de barulho.'
-                            multiline
-                            placeholderTextColor={'#fff'} 
-                            style={{...styles.textInput, height: 80}}
-                            />
-                        </View>
+            <View style={styles.container}>  
+                <TouchableOpacity style={{alignSelf: 'flex-end', padding: 10}} onPress={() => setModalIsVisible(false)}>
+                    <FontAwesome5 name="window-close" size={32} color="white" />
+                </TouchableOpacity>
+                <Text style={{fontSize: 20, padding: 8}}>Dê detalhes sobre a casa:</Text>
+                <View style={{padding: 16, gap: 10, justifyContent: 'center'}}>
+                    <View>
+                        <Text>Endereço</Text>
+                        <TextInput 
+                        style={styles.textInput}
+                        multiline
+                        placeholder='Nome da Rua ou Avenida'
+                        placeholderTextColor={'#fff'}
+                        />
                     </View>
-                    <View style={{flexDirection: 'row'}}>
-                        <TouchableOpacity style={{...styles.btnAction, backgroundColor: '#39A135'}} onPress={() => postHouse("anunciar")}>
-                            <Text style={{fontWeight: '700', textTransform: 'uppercase'}}>Anunciar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{...styles.btnAction, backgroundColor: '#D12828'}} onPress={() => postHouse("")}>
-                            <Text style={{fontWeight: '700', textTransform: 'uppercase'}}>Cancelar</Text>
-                        </TouchableOpacity>
+                    <View>
+                        <Text>Número</Text>
+                        <TextInput 
+                        style={styles.textInput}
+                        keyboardType='number-pad'
+                        placeholder='Número da Casa ou Ap'
+                        placeholderTextColor={'#fff'} 
+                        />
+                    </View>
+                    <View>
+                        <Text>Espaço Disponível</Text>
+                        <TextInput 
+                        style={styles.textInput}
+                        keyboardType='number-pad'
+                        placeholder='Quantidade de Pessoas'
+                        placeholderTextColor={'#fff'} 
+                        />
+                    </View>
+                    <View>
+                        <Text>Prós</Text>
+                        <TextInput 
+                        placeholder='Ex: Casa grande, Lugar seguro, Climatizado e etc..'
+                        multiline
+                        placeholderTextColor={'#fff'} 
+                        style={{...styles.textInput, height: 80}}
+                        />
+                    </View>
+                    <View>
+                        <Text>Preferências do dono</Text>
+                        <TextInput 
+                        placeholder='Ex: Não adolescentes, Não gosto de barulho.'
+                        multiline
+                        placeholderTextColor={'#fff'} 
+                        style={{...styles.textInput, height: 80}}
+                        />
                     </View>
                 </View>
-            </KeyboardAvoidingView>
+                <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity style={{...styles.btnAction, backgroundColor: '#39A135'}} onPress={() => postHouse("anunciar")}>
+                        <Text style={{fontWeight: '700', textTransform: 'uppercase'}}>Anunciar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{...styles.btnAction, backgroundColor: '#D12828'}} onPress={() => postHouse("")}>
+                        <Text style={{fontWeight: '700', textTransform: 'uppercase'}}>Cancelar</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </Modal>
     );
   }
