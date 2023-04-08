@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './styles';
 import ModalAddPlace from '../../components/modalAddPlace';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 
     const [modalIsVisible, setModalIsVisible] = useState(false)
 
@@ -14,7 +14,7 @@ export default function HomeScreen() {
             <ModalAddPlace modalIsVisible={modalIsVisible} setModalIsVisible={setModalIsVisible}/>
         </>
         <Text style={styles.welcomeTxt}>Seja Bem-Vindo!</Text>
-        <TouchableOpacity style={styles.btnOption}>
+        <TouchableOpacity style={styles.btnOption} onPress={() => navigation.navigate('Places')}>
             <FontAwesome5 name="search-location" size={24} color="white" />
             <Text style={styles.optionTxt}>Procuro um espaço</Text>
         </TouchableOpacity>

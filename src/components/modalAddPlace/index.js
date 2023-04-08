@@ -64,7 +64,7 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
                     <View>
                         <Text>Preferências do dono</Text>
                         <TextInput 
-                        placeholder='Ex: Não adolescentes, Não gosto de barulho.'
+                        placeholder='Ex: Não aceito pets e nem adolescentes, não gosto de barulho e etc..'
                         multiline
                         placeholderTextColor={'#fff'} 
                         style={{...styles.textInput, height: 80}}
