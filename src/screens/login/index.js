@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, } from 'react-native';
 
-export default function App() {
+export default function LoginScreen() {
   return (
     <View>
-
+      
     </View>
   );
 }
