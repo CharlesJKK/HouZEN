@@ -16,7 +16,7 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
 
     return (
         <Modal
-        animationType= "fade"
+        animationType= "slide"
         visible={modalIsVisible}
         onRequestClose={() => {setModalIsVisible(false)}}>
             <View style={styles.container}>  
