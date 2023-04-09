@@ -8,7 +8,7 @@ export default function PlacesScreen({ navigation }) {
     return(
         <View style={{padding: 10}}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', position: 'relative', marginTop: 40}}>
-                <TouchableOpacity style={{position: 'absolute', left: 10}} onPress={() => navigation.push('Home')}>
+                <TouchableOpacity style={{position: 'absolute', left: 10, padding: 10}} onPress={() => navigation.push('Home')}>
                     <Ionicons name="caret-back-circle-outline" size={42} color="black"/>
                 </TouchableOpacity>
                 <Text style={{alignSelf: 'center', fontSize: 24, fontWeight: '700'}}>Casas Disponíveis</Text>
@@ -18,12 +18,18 @@ export default function PlacesScreen({ navigation }) {
                 style={{paddingTop: 20, marginTop: 10, paddingBttom: 20, marginBottom: 120}}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
-                    <TouchableOpacity style={styles.itemContainer}>
+                    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PlaceItem', {
+                        address: item.address,
+                        number: item.number,
+                        value: item.value,
+                        pros: item.pros,
+                        preferences: item.preferences
+                    })}>
                         <Image source={require('../../assets/houseEx.png')} style={{maxWidth: 140, height: 80}}/>
                         <View style={{maxWidth: 185, gap: 5}}>
                             <Text style={styles.informationsTxt}>Endereço: {item.address}</Text>
                             <Text style={styles.informationsTxt}>Número da Casa ou Ap: {item.number}</Text>
-                            <Text style={styles.informationsTxt}>Espaço disponível para: {item.availableSpace}</Text>
+                            <Text style={styles.informationsTxt}>Valor: R$ {item.value} Reais</Text>
                         </View>
                     </TouchableOpacity>
                 )}
