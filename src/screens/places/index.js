@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, FlatList, StyleSheet, Image, } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; 
-import placesData from '../../mocks/mocks';
+import api from '../../api/api';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function PlacesScreen({ navigation }) {
+
+
+    const [houseData, setHouseData] = useState()
+  
+    const getData = async () => {
+      const response = await api.get("/houses")
+      try{
+        setHouseData(response.data)
+      }catch{
+      }
+    }
+  
+    useEffect(() => {
+      getData()
+    }, [houseData])
 
     return(
         <View style={{padding: 10}}>
@@ -14,22 +29,21 @@ export default function PlacesScreen({ navigation }) {
                 <Text style={{alignSelf: 'center', fontSize: 24, fontWeight: '700'}}>Casas Disponíveis</Text>
             </View>
             <FlatList
-                data={placesData}
+                data={houseData}
                 style={{paddingTop: 20, marginTop: 10, paddingBttom: 20, marginBottom: 120}}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
                     <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate('PlaceItem', {
                         address: item.address,
-                        number: item.number,
-                        value: item.value,
-                        pros: item.pros,
+                        number: item.houseNumber,
+                        value: item.price,
                         preferences: item.preferences
                     })}>
                         <Image source={require('../../assets/houseEx.png')} style={{maxWidth: 140, height: 80}}/>
                         <View style={{maxWidth: 185, gap: 5}}>
                             <Text style={styles.informationsTxt}>Endereço: {item.address}</Text>
-                            <Text style={styles.informationsTxt}>Número da Casa ou Ap: {item.number}</Text>
-                            <Text style={styles.informationsTxt}>Valor: R$ {item.value} Reais</Text>
+                            <Text style={styles.informationsTxt}>Número da Casa ou Ap: {item.houseNumber}</Text>
+                            <Text style={styles.informationsTxt}>Valor: R$ {item.houseNumber} Reais</Text>
                         </View>
                     </TouchableOpacity>
                 )}

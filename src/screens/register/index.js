@@ -1,7 +1,18 @@
-import React,{ useState } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import api from '../../api/api'
 
 export default function RegisterScreen({ navigation }) {
+
+  const [userName, setUserName] = useState("")
+  const [userPassword, setUserPassword] = useState("")
+
+  const postUser = async () => {
+    await api.post("/users", {
+      'username': userName,
+      'password': userPassword
+    }).then(navigation.push('Login'))
+  }
 
   function handleBlackAction(){
     navigation.push('Login')
@@ -11,25 +22,15 @@ export default function RegisterScreen({ navigation }) {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Nome"
-        onChangeText={()=> {}}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Sobrenome"
-        onChangeText={()=> {}}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={()=> {}}
+        placeholder="Nome de usuário"
+        onChangeText={setUserName}
       />
       <TextInput
         style={styles.input}
         placeholder="Senha"
-        onChangeText={()=> {}}
+        onChangeText={setUserPassword}
       /> 
-      <Button title="Criar Conta" color="green" onPress={() => handleBlackAction()}/>
+      <Button title="Criar Conta" color="green" onPress={postUser}/>
       <View style={styles.buttonContainer2}>
         <Button title="Já tem uma conta? entre aqui" color="black" onPress={() => handleBlackAction()}/>
       </View>

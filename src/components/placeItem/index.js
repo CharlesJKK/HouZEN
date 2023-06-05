@@ -24,7 +24,6 @@ export default function PlaceItem({ route, navigation }) {
                 <Text style={styles.informationsTxt}>Endereço: {address}</Text>
                 <Text style={styles.informationsTxt}>Número da casa ou ap: {number}</Text>
                 <Text style={styles.informationsTxt}>Valor: R$ {value} Reais</Text>
-                <Text style={styles.informationsTxt}>Prós: {pros}</Text>
                 <Text style={styles.informationsTxt}>Preferências do dono: {preferences === "" ? "Nenhuma preferência" : preferences}</Text>
             </View>
             <TouchableOpacity style={styles.contactBtn} onPress={() => handleContactAdvertiser()}>

@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Modal, Text, TouchableOpacity, TextInput, Alert, KeyboardAvoidingView} from 'react-native';
 import styles from './styles';
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import api from '../../api/api';
 
 export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
 
+    const [address, setAddress] = useState("")
+    const [number, setNumber] = useState(0)
+    const [price, setPrice] = useState(0)
+    const [preferences, setPreferences] = useState("")
+
+    const postData = async () => {
+        await api.post("/houses", {
+          'address': address,
+          'houseNumber': number,
+          'price': price,
+          'preferences': preferences
+        })
+      }
+
     function postHouse(btnStr){
         if(btnStr === "anunciar"){
+            postData()
+            setAddress("")
+            setNumber(0)
+            setPrice(0)
+            setPreferences("")
             Alert.alert("Casa anunciada com sucesso!")
             setModalIsVisible(false)
         }else{
@@ -32,6 +52,7 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
                         multiline
                         placeholder='Nome da Rua ou Avenida'
                         placeholderTextColor={'#fff'}
+                        onChangeText={setAddress}
                         />
                     </View>
                     <View>
@@ -41,24 +62,17 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
                         keyboardType='number-pad'
                         placeholder='Número da Casa ou Ap'
                         placeholderTextColor={'#fff'} 
+                        onChangeText={setNumber}
                         />
                     </View>
                     <View>
-                        <Text>Espaço Disponível</Text>
+                        <Text>Valor do local</Text>
                         <TextInput 
                         style={styles.textInput}
                         keyboardType='number-pad'
-                        placeholder='Quantidade de Pessoas'
+                        placeholder='Preço'
                         placeholderTextColor={'#fff'} 
-                        />
-                    </View>
-                    <View>
-                        <Text>Prós</Text>
-                        <TextInput 
-                        placeholder='Ex: Casa grande, Lugar seguro, Climatizado e etc..'
-                        multiline
-                        placeholderTextColor={'#fff'} 
-                        style={{...styles.textInput, height: 80}}
+                        onChangeText={setPrice}
                         />
                     </View>
                     <View>
@@ -68,6 +82,7 @@ export default function ModalAddPlace({modalIsVisible, setModalIsVisible}) {
                         multiline
                         placeholderTextColor={'#fff'} 
                         style={{...styles.textInput, height: 80}}
+                        onChangeText={setPreferences}
                         />
                     </View>
                 </View>

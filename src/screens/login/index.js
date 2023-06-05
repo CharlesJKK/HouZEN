@@ -1,18 +1,49 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
+import api from '../../api/api'
 
 export default function LoginScreen({ navigation }) {
+
+  const [userName, setUserName] = useState("")
+  const [userPassword, setUserPassword] = useState("")
+  const [error, setError] = useState(false)
+  const [usersInfo, setUsersInfo] = useState()
+
+  const getData = async () => {
+    const response = await api.get("/users")
+    try{
+      setUsersInfo(response.data)
+    }catch{
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  function handleLoginButton(){
+    for (let index = 0; index < usersInfo.length; index++) {
+      if(usersInfo[index].username == userName && usersInfo[index].password == userPassword){
+        navigation.navigate('Home')
+      }else if(userName == "" || userPassword == "" || usersInfo[index].username != userName || usersInfo[index].password != userPassword){
+        setError(true)
+      }
+    }
+    setTimeout(() => setError(false), 3000)
+  }
+
   return (
     <View style={styles.container}>
+      {error ? <Text style={{color: "red"}}>Preencha os campos corretamente.</Text> : <></>}
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        onChangeText={()=> {}}/>
+        placeholder="Nome de usuário"
+        onChangeText={setUserName}/>
       <TextInput
         style={styles.input}
         placeholder="Senha"
-        onChangeText={()=> {}}/> 
-      <TouchableOpacity title="Entrar" style={styles.buttonContainer} onPress={() => navigation.navigate('Home')}>
+        onChangeText={setUserPassword}/> 
+      <TouchableOpacity title="Entrar" style={styles.buttonContainer} onPress={handleLoginButton}>
         <Text style={{color: '#fff'}}>ENTRAR</Text>
       </TouchableOpacity>
       <View style={styles.buttonContainer2}>
