@@ -25,7 +25,8 @@ export default function LoginScreen({ navigation }) {
     for (let index = 0; index < usersInfo.length; index++) {
       if(usersInfo[index].username == userName && usersInfo[index].password == userPassword){
         navigation.navigate('Home')
-      }else if(userName == "" || userPassword == "" || usersInfo[index].username != userName || usersInfo[index].password != userPassword){
+        break
+      }if(userName == "" || userPassword == "" || usersInfo[index].username != userName || usersInfo[index].password != userPassword){
         setError(true)
       }
     }

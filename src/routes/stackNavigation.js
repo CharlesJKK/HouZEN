@@ -16,7 +16,7 @@ export default function StackNavigator() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Places" component={PlacesScreen} />
+        <Stack.Screen name="Places" component={PlacesScreen} options={{unmountOnBlur: true}}/>
         <Stack.Screen name="PlaceItem" component={PlaceItem} />
       </Stack.Navigator>
     </NavigationContainer>
